@@ -1,3 +1,4 @@
+import { Loader } from 'components/Loader/Loader';
 import css from './ContactsList.module.css';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -27,7 +28,7 @@ const ContactsList = () => {
   return (
     <>
       {error !== null && <p>{error}</p>}
-      {isLoading && <p>Loading....</p>}
+      {isLoading && <Loader />}
       {contacts.length > 0 && !isLoading && (
         <ul>
           {filteredContacts.map(contact => (
