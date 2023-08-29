@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { nanoid } from 'nanoid';
-import { selectorContacts, setContacts } from 'redux/contactsSlice';
+import { selectorContacts } from 'redux/contactsSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import css from './ContactForm.module.css';
+import { requestAddContact } from 'redux/operations';
 
 const nameId = nanoid();
 const telId = nanoid();
@@ -34,7 +35,7 @@ export default function ContactForm({ onSubmit }) {
       alert(`${data.name} is already in contacts`);
       return;
     }
-    dispatch(setContacts(data));
+    dispatch(requestAddContact(data));
   };
 
   const isContactNameExist = (contacts, name) => {
@@ -46,9 +47,9 @@ export default function ContactForm({ onSubmit }) {
   const handleSubmit = e => {
     e.preventDefault();
     const newContact = {
-      id: nanoid(),
       name,
-      number,
+      phoneNumber: number,
+      id: nanoid(),
     };
     formSubmitContacts(newContact);
     reset();
